@@ -18,16 +18,16 @@ define("DB_PORT", 3306);
 function abrirbanco(){
 // são o mesmo da constante, ou seja não precisa os "".
 // conexão 
-    $conn = new  mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+    $Conn = new  mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
   
   // vericar se ocorreu algum erro durante a conexão
   // connect_error é uma função de verificar se teve erro
-  if($conn->connect_error){
+  if($Conn->connect_error){
     // matará a conexão
-   die(" falha na conexão: ". $conn ->connect_error);
+   die(" falha na conexão: ". $Conn ->connect_error);
   }
 // poo
-    return $conn;
+    return $Conn;
 }
 /**
  * 
@@ -35,8 +35,8 @@ function abrirbanco(){
  * 
 */
  
-function fecharbanco($conn){
-    $conn->close();
+function fecharbanco($Conn){
+    $Conn->close();
 
 
 }

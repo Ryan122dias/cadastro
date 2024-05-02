@@ -7,36 +7,38 @@ include "conexao.php";
 //print_r($_SERVER);
 //echo "</pre>";
 //exit;
- if($_SERVER['REQUEST_METHOD']== "POST"){
+
+ if($_SERVER ['REQUEST_METHOD']==="POST"){
   
     //captura os dados digitado no form e salva em variaveis
     //para facilitar a manuteçãodos dados
-    $NOME = $_POST['nome'];
-    $SOBRENOME = $_POST['sobrenome'];
-    $NASCIMENTO = $_POST['nascimento'];
-    $ENDERECO = $_POST['endereço'];
-    $TELEFONE = $_POST['telefone'];
+    $nome = $_POST['nome'];
+    $sobrenome = $_POST['sobrenome'];
+    $nascimento = $_POST['nascimento'];
+    $endereco = $_POST['endereco'];
+    $telefone = $_POST['telefone'];
 
  
     // vamos abrir a conexão com o banco de dados
-    $conn = abrirbanco();
+    $Conn = abrirbanco();
 
     // vamos criar o sql para realizar o insert dos dados no BD
+    // cadastro mais index
     $sql = "INSERT INTO pessoas
-    (nome, sobrenome,nascimento,endereço,telefone)
-    VANUES
-    ('$NOME','$SOBRENOME','$NASCIMENTO','$ENDERECO','$TELEFONE)";
+    (nome,sobrenome,nascimento,endereco,telefone)
+    values
+    ('$nome ','$sobrenome',' $nascimento ','$endereco','$telefone')";
 
- 
-
-
-if ($conn->query($sql) == true) {
+if ($Conn->query($sql) === true) {
     echo ":) sucesso ao cadastrar(:";
 }else{
     echo":( erro ao cadastrar o contato :(";
 }
 
+fecharbanco($Conn);
+
  }
+ 
 
 ?>
 
@@ -58,39 +60,39 @@ if ($conn->query($sql) == true) {
     <h1>agenda de contatos</h1>
     <nav>
         <ul>
-            <li><a href="index.php">INFORMAÇÕES DO SISTEMA</a></li>
+            <li><a href="index.php">home</a></li>
 
-            <li><a href= "conexao.php">CONEXÃO</a></li>
+            <li><a href= "cadastro.php">cadastro</a></li>
         </ul>
     </nav>
     </head>
-<select>
-    <h2>cadastro contado</h2>
-    <form action="" method="post" enctype="multipart/form-data">
+<selection>
+    
+    <form action="" method="post" enctype="multipart/form-data"><br>
 
-    <
-    <label for="nome"> nome </label>
-    <input type="text" id="nome" name="nome" required>
+    <label for="nome">nome</label>
+    <input type="text" id="nome" nome="nome" required>
+    
 
-    <label for="sobrenome">sobrenome</label>
-    <input type="text" id="sobrenome" name="sobrenome" required>
+    <label for="sobrenome">sobrerenome</label>
+    <input type="text" id="sobrenome" nome="sobrenome" required>
 
     <label for="nascimento">nascimento</label>
-    <input type="text" id="nascimento" name="nascimento" required>
+    <input type="text" id="nascimento" nome="nascimento" required>
 
     <label for="endereço">endereço</label>
-    <input type="text" id="endereço" name="endereço" required>
+    <input type="text" id="endereço" nome="endereço" required>
 
     <label for="telefone">telefone</label>
-    <input type="text" id="telefone" name="telefone" required>
+    <input type="text" id="telefone" nome="telefone" required>
 
-    <button type=submit>cadastro</button>
+    <button type="submit">cadastro</button>
     
 
 
 
     </form>
-</select>
+</selection>
 
 
 </body>
