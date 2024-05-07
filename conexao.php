@@ -1,51 +1,29 @@
 <?php
-// toda vez que for usar o mysqli
-// mysqli sãos conjuto de função
 
+// criar constante para amarzenar as informações de acesso ao banco de dados//
+define ("DB_HOST","localhost");
+define ("DB_USER","root");
+define ("DB_PASS","");
+define ("DB_NAME","agenda");
+define ("DB_PORT",3306);
 
-// CRIAR CONTANTES PARA ARMAZENAR AS INFORMAÇÕES DE ACESSO AO BANCO DE DADOS.
-// CONSTANTE.
-define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "agenta");
-define("DB_PORT", 3306);
 /**
- * abre uma conexão com o banco de dados e retorna um objeto de conexão
- * @return mysqli que é o objeto de conexão mysqli.
+ * Abre uma conexao com o banco de dados e retornaum objeto de conexao 
+ * @return mysqli que é o objeto de conexao 
  */
-// nosso sistema serve para explicar
 function abrirbanco(){
-// são o mesmo da constante, ou seja não precisa os "".
-// conexão 
-    $Conn = new  mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-  
-  // vericar se ocorreu algum erro durante a conexão
-  // connect_error é uma função de verificar se teve erro
-  if($Conn->connect_error){
-    // matará a conexão
-   die(" falha na conexão: ". $Conn ->connect_error);
-  }
-// poo
-    return $Conn;
+    $conexaoComBanco = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT );
+
+    //verificar se ocorreu algum erro durante a conexao
+    if ($conexaoComBanco->connect_error) {
+        die("falha na conexão: ". $conexaoComBanco->connect_error);
+
+    }
+
+    return $conexaoComBanco;
 }
-/**
- * 
- * fechar conexão com o banco de dados
- * 
-*/
- 
-function fecharbanco($Conn){
-    $Conn->close();
-
-
+function fecharBanco($conexaoComBanco) {
+    $conexaoComBanco->close();
 }
-
-// estou importando os sistema de abrir a conexão do mysqli
-//  espa+ctrl ser ver a para abrir o terminal
-// no terminar digitar esse comando php -S locahost:8080
-
 
 ?>
-
-
