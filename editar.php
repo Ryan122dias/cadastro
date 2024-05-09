@@ -1,35 +1,66 @@
 <?php
-//incluir o conexao na pagina e todo o seu coteudo 
-include 'conexao.php';
-include_once 'funcoes.php';
+include'conexao.php';
+include_once'funcoes.php';
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+// exit;
+if (isset($_GET['acao']) && $_GET['acao'] == 'editar'){
+    // if ternario
+    $_id = isset($_GET['id']) ? $_GET['id']:0;
+    
+    //vamos abrir a conexão com  o banco
+    $conexaoComBanco = abrirbanco();
 
-if(isset ($_GET['acao']) && $_GET['acao'] == 'excluir') {
+    $sql = "select * from pessoas where id = ?";
+    // preparar o sql para consultaro id no banco de dados
 
-    $id = $_GET['id'];
- //   dd($_SERVER);
-  //  dd($id);
-    //isset resume if else
+    $pegardados =$conexaoComBanco->prepare($sql);
 
-    if($id > 0 ){
-        // abrir a conexão com banco
-        $conexaoComBanco = abrirbanco();
-        //prepara um sql de Exclusão
-        $sql = "DELETE from pessoas where id = $id";
-       // execultar comando no brasil
-       if ($conexaoComBanco-> query($sql) === true){
-        echo "<script> alert ('contato excluido com sucesso')</script>";
-       } else{
-        echo"Contato excluido com sucesso:( ";
+    // substituir o ???????
+    $pegardados-> bind_param("i",$id);
+    // execudar o sql que preparamos
+    $pegardados->execute();
+    $result = $pegardados-> get_result();
 
-       }
+    if($result->num_rows == 1) {
+        dd ($registro);
+    } else {
+        echo"nenhum registro encontrado";
+        exit;
     }
-fecharBanco($conexaoComBanco);
 
 }
+    $pegardados->close();
+    fecharBanco($conexaoComBanco);
+
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        
+        $id =$_POST['id'];
+        $nome = $_POST['nome'];
+        $sobrenome = $_POST['sobrenome'];
+        $nascimento = $_POST['nascimento'];
+        $endereco = $_POST['endereco'];
+        $telefone = $_POST['telefone'];
+
+        $conexaoComBanco = abrirbanco();
+
+        $sql = "UPDATE pessoas set nome ='$nome, sobrenome = $sobrenome,
+        nascimento= $nascimento, endereco =$endereco, telefone =$telefone
+        where id = $id";
+     
+  if($conexaoComBanco-> query($sql) === true){
+    echo":)sucesso ao atualizar o contato:)";
+  } else{
+     echo":( erro ao tualizar o contato:(";
+  }
+ fecharBanco($conexaoComBanco);
+}
+
+
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -95,7 +126,7 @@ fecharBanco($conexaoComBanco);
                             <td><?= $registro['telefone'] ?></td>
                             <td>
                                 <a href="editar.php?acao=editar&id=<?= $registro['id']?>"><button>Editar</button></a>
-                                <a href="?acao=excluir&id=<?= $registro['id']?>"  onclick="confirm('tem certezaque deseja excluir');">
+                                <a href="?acao=excluir&id=<?= $registro['id']?>" onclick="return('tem certezaque deseja excluir');">
                                 <button>Excluir</button></a>
                             </td>
                         </tr>
@@ -121,5 +152,4 @@ fecharBanco($conexaoComBanco);
 
     </section>
 </body>
-
 </html>

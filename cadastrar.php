@@ -10,6 +10,7 @@ include'conexao.php';
 //para facilitar a manipulação dos dados
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
+    
    $nome = $_POST['nome'];
    $sobrenome = $_POST['sobrenome'];
    $nascimento = $_POST['nascimento'];
@@ -54,10 +55,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cadastrar.css">
     <title>agenda</title>
 </head>
 
 <body>
+    <div class="pai-de-todos">
+
+    <div class="filho">
     <header>
         <h1>Agenda de contatos</h1>
     
@@ -69,32 +74,37 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     </nav>
 </header>
-<section>
-    <h2>Cadastrar Contato</h2>
+</div>
+
+<section >
+    <h2> atualizar  Contato</h2>
 <!-- action = envio,  method = metodo de envio -->
     <form action="" method="POST" enctype="multipart/form-data">
 
-        <label for = "nome">Nome</label>
-        <input type="text" id="nome" name="nome" required>
+        <label for = "nome">nome</label>
+        <input type="text" id="nome" name="nome"  value="<?= $registro['nome']?> " required>
 
-        <label for = "sobrenome">Sobrenome</label>
-        <input type="text" id="sobrenome" name="sobrenome" required>
+        <label for = "sobrenome">sobrenome</label>
+        <input type="text" id="sobrenome" name="sobrenome" value= " <?=$registro['sobrenome']?>"  required>
 
         <label for = "nascimento"> nascimento</label>
-        <input type="date" id="nascimento" name="nascimento" required>
+        <input type="date" id="nascimento" name="nascimento" value= " <?=$registro['nascimento']?>"  required>
 
-        <label for = "endereco">Endereco</label>
-        <input type="text" id="endereco" name="endereco" required>
+        <label for = "endereco">endereco</label>
+        <input type="text" id="endereco" name="endereco" value="<?=$registro['endereco']?>" required>
 
         <label for = "telefone">Telefone</label>
-        <input type="text" id="telefone" name="telefone" required>
+        <input type="text" id="telefone" name="telefone" value="<?=$registro['telefone']?>" required>
 
-        <button type="submit">Cadastrar</button>
+        <input type="hidden" id="id",name="id" value="<?=$registro['id']?>">
+        <button type="submit">atualizar</button>
+        
 
         </form>
     </section>
-
-
+    </div>
+    </div>
 </body>
 
 </html>
+

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+
+
+:root{
+    --cor--de--fundo:black;
+    --cor--da--letra: rgb(164, 4, 185);
+}
+
+
+*{
+    font-family: "jaro",sans-serif;
+    margin: 30px;
+    padding: 1px;
+    box-sizing:border-box;
+    
+
+   
+   
+}
+body{
+  
+    font-size: 21px;
+    text-decoration:none;
+    text-align: left;
+    word-spacing: 10px ;
+    
+}
+.pai-de-todos{
+    display: flex;
+    width: 50vw;
+    margin: 100px;
+    padding: 190px;
+
+    
+  
+}
+.filho{
+    background-color: var(--cor--de--fundo);
+    width: 4000px;
+    height: auto;
+}
+
+.filha{
+width: 80vw;
+height: auto;
+background-color: var(--cor--da--letra);
+
+}
+
+
